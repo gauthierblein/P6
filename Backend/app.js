@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const userRoutes = require("./routes/user");
 
 const app = express();
-app.use(express);
 
 
 // connexion to mongoDB
@@ -24,10 +23,9 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use((req, res) => {
-    res.json({ message: 'Votre requête a bien été reçue !' }); 
- });
+  app.use(bodyParser.json());
 
-/*app.use("/api/auth", userRoutes);*/
+
+app.use("/api/auth", userRoutes);
 
 module.exports = app;
