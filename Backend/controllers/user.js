@@ -16,17 +16,12 @@ exports.signup = (req, res, next) => {
         .then(() => res.status(201).json({
           message: 'Utilisateur créé !'
         }))
-        .catch(error => res.status(400).json({
-          error
-        }));
+        .catch(error => res.status(400).json({error}));
     })
-    .catch(error => res.status(500).json({
-      error
-    }));
-
+    .catch(error => res.status(500).json({error}));
 };
 
-// Méthode pour identifier un utilisateur déjà existant - SignIn
+// Méthode pour identifier un utilisateur déjà existant - Login
 
 exports.login = (req, res, next) => {
     User.findOne({
@@ -47,8 +42,6 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
-            // Permet de vérifier si la requête est authentifiée
-            // on va pouvoir obtenir un token encodé pour cette authentification grâce à jsonwebtoken, on va créer des tokens et les vérifier
             token: jwt.sign(
               { userId: user._id },
               'RANDOM_TOKEN_SECRET',
@@ -56,11 +49,7 @@ exports.login = (req, res, next) => {
             )
           });
         })
-        .catch(error => res.status(500).json({
-          error
-        }));
+        .catch(error => res.status(500).json({error}));
     })
-    .catch(error => res.status(500).json({
-      error
-    }));
+    .catch(error => res.status(500).json({error}));
 };

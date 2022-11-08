@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require("helmet");
 const bodyParser = require ('body-parser');
 const mongoose = require('mongoose');
 
@@ -6,6 +7,7 @@ const auth = require('../Backend/middlewares/auth');
 
 const userRoutes = require("../Backend/routes/user");
 const sauceRoutes = require("../Backend/routes/sauce");
+const path = require("path");
 
 const app = express();
 
@@ -26,13 +28,14 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use((req, res) => {
+/*app.use((req, res) => {
     res.json({ message: 'Votre requête a bien été reçue !' }); 
- });
+ });*/
 
 app.use(bodyParser.json());
+app.use(helmet());
 
-
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", userRoutes);
 app.use("/api/sauce", sauceRoutes);
 

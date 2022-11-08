@@ -18,7 +18,7 @@ const sauceSchema = mongoose.Schema({
   usersDisliked: [{ type: String }],
 });
 
-userSchema.plugin(sanitizerPlugin);
+sauceSchema.plugin(sanitizerPlugin);
 
 
 module.exports = mongoose.model("Sauce", sauceSchema);

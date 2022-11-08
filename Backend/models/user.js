@@ -6,8 +6,8 @@ const sanitizerPlugin = require('express-mongo-sanitize');
 const userSchema = mongoose.Schema({
   email: {
     type: String,
-    required: true,
-    unique: [true, "Veuillez entrer votre adresse email"],
+    unique: true,
+    required: [true, "Veuillez entrer votre adresse email"],
     match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, "Veuillez entrer une adresse email correcte"]
     },
   password: {
